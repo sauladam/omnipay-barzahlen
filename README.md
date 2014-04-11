@@ -2,6 +2,9 @@
 
 **Barzahlen driver for the Omnipay PHP payment processing library**
 
+[![Build Status](https://travis-ci.org/sauladam/omnipay-barzahlen.svg?branch=master)](https://travis-ci.org/sauladam/omnipay-barzahlen)
+[![Total Downloads](https://poser.pugx.org/sauladam/omnipay-barzahlen/downloads.png)](https://packagist.org/packages/sauladam/omnipay-barzahlen)
+
 This is non-official Omnipay-driver for the German payment gateway provider [Barzahlen](https://www.barzahlen.de/).
 In order to use it the Omnipay-Framework is required.
 
