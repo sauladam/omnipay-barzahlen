@@ -54,6 +54,7 @@ $gateway->setPaymentKey('yourPaymentKey');
 $request = $gateway->purchase(
 	array(
 		'currency' => 'EUR',
+		// Amounts higher than 999.99 will not be accepted
 		'amount' => '111.59',
 		// The order_id is not mandatory, you can set
 		// it later in another request if you want.
