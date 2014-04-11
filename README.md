@@ -48,6 +48,10 @@ require 'vendor/autoload.php';
 use Omnipay\Omnipay;
 
 $gateway = Omnipay::create('Barzahlen');
+
+// Testmode is on by default until you explicitly switch it off.
+// You can either do this here on the gateway level or for each request.
+$gateway->setTestMode(false);
 $gateway->setShopId('yourShopid');
 $gateway->setPaymentKey('yourPaymentKey');
 
@@ -112,7 +116,7 @@ $request = $gateway->void(array(
 ));
 ```
 
-### Refund (give them the money back...)
+### Refund (give them their money back...)
 
 ```php
 $request = $gateway->refund(array(
