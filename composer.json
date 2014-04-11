@@ -1,0 +1,31 @@
+{
+    "name": "sauladam/omnipay-barzahlen",
+    "type": "library",
+    "description": "Barzahlen driver for the Omnipay payment processing library",
+    "keywords": [
+        "barzahlen",
+        "payment",
+        "omnipay"
+    ],
+    "homepage": "https://github.com/sauladam/omnipay-barzahlen",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saulius Adamonis"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Omnipay\\Barzahlen\\" : "src/" }
+    },
+    "require": {
+        "omnipay/common": "v2.1.0"
+    },
+    "require-dev": {
+        "omnipay/tests": "~2.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}

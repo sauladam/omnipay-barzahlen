@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Date: Thu, 10 Apr 2014 20:04:33 GMT
+Server: Apache
+Strict-Transport-Security: max-age=31536000
+ETag: "da2a623e14582f07010ab4ac206e5e18"
+Cache-Control: max-age=0, private, must-revalidate
+Status: 200
+Content-Length: 271
+Content-Type: application/xml; charset=utf-8
+
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <transaction-id>68206013</transaction-id>
+  <result>0</result>
+  <hash>1f76e56d1f9f6813d138ec4c1433ce50bb59c6eecd4f216ea7df70d34a679fd1723909209a9a4fde9abef5391a15845f448a59613b254c20ebd6024c8e87ee2a</hash>
+</response>
