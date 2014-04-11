@@ -50,7 +50,7 @@ class Response extends AbstractResponse
     {
         $dataArray = $this->arrayFromXml($this->data);
 
-        $ignoreKeys = ['hash'];
+        $ignoreKeys = array('hash');
 
         return array_diff_key($dataArray, array_flip($ignoreKeys));
     }
