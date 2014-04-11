@@ -33,6 +33,8 @@ class GatewayTest extends GatewayTestCase
                 'some var 0',
                 'some var 1',
             ),
+
+            'dueDate' => date('Y-m-d'),
         );
 
         $request = $this->gateway->purchase($options);
@@ -53,6 +55,7 @@ class GatewayTest extends GatewayTestCase
         $this->assertSame($options['customVars'][0], $customVars['custom_var_0']);
         $this->assertSame($options['customVars'][1], $customVars['custom_var_1']);
         $this->assertSame('', $customVars['custom_var_2']);
+        $this->assertSame($options['dueDate'], $request->getDueDate());
         $this->assertTrue($request->getTestMode());
     }
 
