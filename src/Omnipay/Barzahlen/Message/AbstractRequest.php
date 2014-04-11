@@ -189,7 +189,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         $this->httpClient->getEventDispatcher()->addListener(
             'request.error',
             function (\Guzzle\Common\Event $event) {
-                if ( in_array($event['response']->getStatusCode(), array(400, 404)) ) {
+                if (in_array($event['response']->getStatusCode(), array(400, 404))) {
                     $event->stopPropagation();
                 }
             }
