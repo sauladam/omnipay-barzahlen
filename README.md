@@ -81,7 +81,7 @@ $request = $gateway->purchase(
 
 $response = $request->send();
 
-if ($response->isSuccessful() && $response->isVerified());
+if ($response->isSuccessful() && $response->isVerified())
 {
 	$transactionId = $response->getTransactionReference();
 }
