@@ -13,13 +13,13 @@ processing library for PHP 5.3+. This package implements barzahlen support for O
 
 ## Installation
 
-Omnipay is installed via [Composer](http://getcomposer.org/). To install, simply add it
+This package is installed via [Composer](http://getcomposer.org/). To install, simply add it
 to your `composer.json` file:
 
 ```json
 {
     "require": {
-        "sauladam/omnipay-barzahlen": "~2.0"
+        "sauladam/omnipay-barzahlen": "dev-master"
     }
 }
 ```
