@@ -40,7 +40,7 @@ class RefundResponseTest extends TestCase
     public function testPurchaseFailure()
     {
         $httpResponse = $this->getMockHttpResponse('RefundFailure.txt');
-        $response = new Response($this->getMockRequest(), $httpResponse->getBody(),'somePaymentKey');
+        $response = new Response($this->getMockRequest(), $httpResponse->getBody(), 'somePaymentKey');
 
         /* Check the request details */
         $this->assertFalse($response->isSuccessful());

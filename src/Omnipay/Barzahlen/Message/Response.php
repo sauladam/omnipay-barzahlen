@@ -27,7 +27,8 @@ class Response extends AbstractResponse
         return $this->data;
     }
 
-    public function asArray() {
+    public function asArray()
+    {
         $dataArray = json_decode(json_encode($this->data), true);
 
         foreach ($dataArray as &$item) {
