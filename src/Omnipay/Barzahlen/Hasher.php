@@ -2,8 +2,8 @@
 
 namespace Omnipay\Barzahlen;
 
-class Hasher {
-
+class Hasher
+{
     const HASH_ALGORITHM = 'sha512';
     const SEPARATOR = ';';
 
@@ -34,7 +34,8 @@ class Hasher {
      *
      * @return array
      */
-    protected static function onlyHashableKeys($array, $ignoreKeys = []) {
+    protected static function onlyHashableKeys($array, $ignoreKeys = [])
+    {
         $ignoreKeys = array_merge(['hash', 'due_date'], $ignoreKeys);
 
         return array_diff_key($array, array_flip($ignoreKeys));
