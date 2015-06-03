@@ -2,13 +2,20 @@
 
 namespace Omnipay\Barzahlen\Message;
 
+use Omnipay\Barzahlen\Hasher;
 use Omnipay\Tests\TestCase;
 
 class ResendEmailRequestTest extends TestCase
 {
-    private $request;
+    /**
+     * @var ResendEmailRequest
+     */
+    protected $request;
 
-    private $options;
+    /**
+     * @var array
+     */
+    protected $options;
 
     public function setUp()
     {
@@ -36,8 +43,8 @@ class ResendEmailRequestTest extends TestCase
         $this->assertSame($this->options['transactionId'], $data['transaction_id']);
         $this->assertSame($this->options['language'], $data['language']);
 
-        $expectedHash = AbstractRequest::createHashFromArray(
-            $this->request->getHashableData(),
+        $expectedHash = Hasher::fromArray(
+            $data,
             $this->options['paymentKey']
         );
 
@@ -55,8 +62,8 @@ class ResendEmailRequestTest extends TestCase
         $this->assertSame('68206013', $response->getTransactionReference());
         $this->assertNull($response->getMessage());
 
-        $expectedHash = AbstractRequest::createHashFromArray(
-            $response->getHashableData(),
+        $expectedHash = Hasher::fromArray(
+            $response->asArray(),
             $this->options['paymentKey']
         );
 

@@ -2,6 +2,7 @@
 
 namespace Omnipay\Barzahlen\Message;
 
+use Omnipay\Barzahlen\Hasher;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
 
@@ -26,6 +27,16 @@ class Response extends AbstractResponse
         return $this->data;
     }
 
+    public function asArray() {
+        $dataArray = json_decode(json_encode($this->data), true);
+
+        foreach ($dataArray as &$item) {
+            $item = is_array($item) ? '' : $item;
+        }
+
+        return $dataArray;
+    }
+
     public function isSuccessful()
     {
         $xmlValue = $this->data->result;
@@ -39,31 +50,12 @@ class Response extends AbstractResponse
             return null;
         }
 
-        $hashableData = $this->getHashableData();
-
-        $hash = AbstractRequest::createHashFromArray($hashableData, $this->paymentKey);
+        $hash = Hasher::fromArray(
+            $this->asArray(),
+            $this->paymentKey
+        );
 
         return $hash === $this->getHash();
-    }
-
-    public function getHashableData()
-    {
-        $dataArray = $this->arrayFromXml($this->data);
-
-        $ignoreKeys = array('hash');
-
-        return array_diff_key($dataArray, array_flip($ignoreKeys));
-    }
-
-    protected function arrayFromXml($xml)
-    {
-        $dataArray = json_decode(json_encode($this->data), true);
-
-        foreach ($dataArray as &$item) {
-            $item = is_array($item) ? '' : $item;
-        }
-
-        return $dataArray;
     }
 
     public function getTransactionReference()

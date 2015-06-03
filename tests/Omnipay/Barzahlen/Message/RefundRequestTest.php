@@ -2,13 +2,20 @@
 
 namespace Omnipay\Barzahlen\Message;
 
+use Omnipay\Barzahlen\Hasher;
 use Omnipay\Tests\TestCase;
 
 class RefundRequestTest extends TestCase
 {
-    private $request;
+    /**
+     * @var RefundRequest
+     */
+    protected $request;
 
-    private $options;
+    /**
+     * @var array
+     */
+    protected $options;
 
     public function setUp()
     {
@@ -40,8 +47,8 @@ class RefundRequestTest extends TestCase
         $this->assertSame($this->options['currency'], $data['currency']);
         $this->assertSame($this->options['amount'], $data['amount']);
 
-        $expectedHash = AbstractRequest::createHashFromArray(
-            $this->request->getHashableData(),
+        $expectedHash = Hasher::fromArray(
+            $data,
             $this->options['paymentKey']
         );
 
@@ -61,8 +68,8 @@ class RefundRequestTest extends TestCase
         $this->assertSame('22791842', $response->getRefundTransactionId());
         $this->assertNull($response->getMessage());
 
-        $expectedHash = AbstractRequest::createHashFromArray(
-            $response->getHashableData(),
+        $expectedHash = Hasher::fromArray(
+            $response->asArray(),
             $this->options['paymentKey']
         );
 

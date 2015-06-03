@@ -2,13 +2,13 @@
 
 namespace Omnipay\Barzahlen\Message;
 
+use Omnipay\Barzahlen\Hasher;
+
 /**
  * Barzahlen Abstract Request
  */
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
-    const HASHALGO = 'sha512'; // hash algorithm
-    const SEPARATOR = ';'; // separator character
     const MAXATTEMPTS = 2; // maximum of allowed connection attempts
 
     protected $liveEndpoint = 'https://api.barzahlen.de/v1/transactions';
@@ -90,7 +90,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             'custom_var_2' => '',
         );
 
-        $array = (array) $this->getParameter('customVars');
+        $array = (array)$this->getParameter('customVars');
 
         $array = $this->correctArrayKeys($array, 'custom_var_');
 
@@ -144,7 +144,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         $results = array();
 
         foreach ($array as $key => $value) {
-            $newKey = $keyPrefix.$key;
+            $newKey = $keyPrefix . $key;
             $results[$newKey] = $value;
         }
 
@@ -156,6 +156,15 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getTestMode() ? $this->testEndpoint : $this->liveEndpoint;
     }
 
+    protected function prepareForSending($dataArray)
+    {
+        $dataArray['hash'] = Hasher::fromArray($dataArray, $this->getPaymentKey());
+
+        $this->removeEmptyValues($dataArray);
+
+        return $dataArray;
+    }
+
     protected function removeEmptyValues(array &$array)
     {
         foreach ($array as $key => $value) {
@@ -163,15 +172,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
                 unset($array[$key]);
             }
         }
-    }
-
-    public static function createHashFromArray($hashArray, $paymentKey)
-    {
-        $hashArray[] = $paymentKey;
-
-        $hashString = implode(self::SEPARATOR, $hashArray);
-
-        return hash(self::HASHALGO, $hashString);
     }
 
     public function sendData($data)

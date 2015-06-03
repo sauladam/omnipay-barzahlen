@@ -19,16 +19,7 @@ class ResendEmailRequest extends AbstractRequest
         $requestArray['transaction_id'] = $this->getTransactionId();
         $requestArray['language'] = $this->getLanguage();
 
-        $this->setHashableData($requestArray);
-
-        $requestArray['hash'] = self::createHashFromArray(
-            $this->getHashableData(),
-            $this->getPaymentKey()
-        );
-
-        $this->removeEmptyValues($requestArray);
-
-        return $requestArray;
+        return $this->prepareForSending($requestArray);
     }
 
     public function getEndpoint()

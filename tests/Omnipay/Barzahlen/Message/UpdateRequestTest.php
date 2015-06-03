@@ -2,13 +2,20 @@
 
 namespace Omnipay\Barzahlen\Message;
 
+use Omnipay\Barzahlen\Hasher;
 use Omnipay\Tests\TestCase;
 
 class UpdateRequestTest extends TestCase
 {
-    private $request;
+    /**
+     * @var UpdateRequest
+     */
+    protected $request;
 
-    private $options;
+    /**
+     * @var array
+     */
+    protected $options;
 
     public function setUp()
     {
@@ -36,8 +43,8 @@ class UpdateRequestTest extends TestCase
         $this->assertSame($this->options['transactionId'], $data['transaction_id']);
         $this->assertSame($this->options['orderId'], $data['order_id']);
 
-        $expectedHash = AbstractRequest::createHashFromArray(
-            $this->request->getHashableData(),
+        $expectedHash = Hasher::fromArray(
+            $data,
             $this->options['paymentKey']
         );
 
@@ -55,8 +62,8 @@ class UpdateRequestTest extends TestCase
         $this->assertSame('68194729', $response->getTransactionReference());
         $this->assertNull($response->getMessage());
 
-        $expectedHash = AbstractRequest::createHashFromArray(
-            $response->getHashableData(),
+        $expectedHash = Hasher::fromArray(
+            $response->asArray(),
             $this->options['paymentKey']
         );
 

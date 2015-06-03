@@ -2,6 +2,8 @@
 
 namespace Omnipay\Barzahlen\Message;
 
+use Omnipay\Barzahlen\Hasher;
+
 /**
  * Barzahlen create Request
  */
@@ -36,18 +38,11 @@ class PurchaseRequest extends AbstractRequest
         $requestArray['custom_var_1'] = $customVars['custom_var_1'];
         $requestArray['custom_var_2'] = $customVars['custom_var_2'];
 
-        $this->setHashableData($requestArray);
-
-        $requestArray['hash'] = self::createHashFromArray(
-            $this->getHashableData(),
-            $this->getPaymentKey()
-        );
+        //$requestArray['hash'] = Hasher::fromArray($requestArray, $this->getPaymentKey());
 
         $requestArray['due_date'] = $this->getDueDate();
 
-        $this->removeEmptyValues($requestArray);
-
-        return $requestArray;
+        return $this->prepareForSending($requestArray);
     }
 
     public function getEndpoint()

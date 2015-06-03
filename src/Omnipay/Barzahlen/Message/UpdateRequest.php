@@ -19,16 +19,7 @@ class UpdateRequest extends AbstractRequest
         $requestArray['transaction_id'] = $this->getTransactionId();
         $requestArray['order_id'] = $this->getOrderId();
 
-        $this->setHashableData($requestArray);
-
-        $requestArray['hash'] = self::createHashFromArray(
-            $this->getHashableData(),
-            $this->getPaymentKey()
-        );
-
-        $this->removeEmptyValues($requestArray);
-
-        return $requestArray;
+        return $this->prepareForSending($requestArray);
     }
 
     public function getEndpoint()
