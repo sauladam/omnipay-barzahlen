@@ -15,7 +15,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Omnipay\\Barzahlen\\" : "src/" }
+        "psr-4": { "Omnipay\\Barzahlen\\" : "src/Omnipay/Barzahlen" }
     },
     "require": {
         "omnipay/common": "~2.0"
